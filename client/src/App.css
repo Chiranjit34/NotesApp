@@ -1,5 +1,5 @@
 body {
-  background: rgb(17, 31, 75);
+  background: black;
 }
 .notes-page {
   width: 100%;
@@ -164,7 +164,7 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgb(17, 31, 75);
+  background: black;
 }
 .login-page h2,
 .login-page h3 {

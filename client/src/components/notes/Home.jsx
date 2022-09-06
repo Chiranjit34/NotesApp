@@ -7,12 +7,9 @@ export default function Home() {
   const [token, setToken] = useState("");
 
   const getNotes = async (token) => {
-    const res = await axios.get(
-      "https://notesapp34.herokuapp.com/api/notes",
-      {
-        headers: { Authorization: token },
-      }
-    );
+    const res = await axios.get("https://notesapp34.herokuapp.com/api/notes", {
+      headers: { Authorization: token },
+    });
     setNotes(res.data);
   };
 
@@ -27,12 +24,9 @@ export default function Home() {
   const deleteNote = async (id) => {
     try {
       if (token) {
-        await axios.delete(
-          `https://notesapp34.herokuapp.com/api/notes/${id}`,
-          {
-            headers: { Authorization: token },
-          }
-        );
+        await axios.delete(`https://notesapp34.herokuapp.com/api/notes/${id}`, {
+          headers: { Authorization: token },
+        });
         getNotes(token);
       }
     } catch (error) {
@@ -49,9 +43,11 @@ export default function Home() {
             <p>{note.content}</p>
           </div>
           <p className="date">{format(note.date)}</p>
-          <div className="card-footer" onClick={() => deleteNote(note._id)}>
+          <div className="card-footer">
             {note.name}
-            <p>Delete</p>
+            <div onClick={() => deleteNote(note._id)}>
+              <p>Delete</p>
+            </div>
           </div>
         </div>
       ))}
