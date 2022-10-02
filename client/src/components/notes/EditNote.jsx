@@ -98,14 +98,12 @@ export default function EditNote({ match }) {
             id="date"
             name="date"
             onChange={onChangeInput}
-            required
           />
           <input
             type="time"
             id="time"
             name="time"
             onChange={onChangeInput}
-            required
           />
         </div>
 
