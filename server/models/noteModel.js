@@ -11,8 +11,11 @@ const noteSchema = new mongoose.Schema(
       required: true,
     },
     date: {
-      type: Date,
+      type: String,
       default: Date.now,
+    },
+    time: {
+      type: String,
     },
     user_id: {
       type: String,

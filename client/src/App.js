@@ -3,6 +3,7 @@ import axios from "axios";
 import Login from "./components/Login";
 import Notes from "./components/Notes";
 import "./App.css"
+import { api } from "./api";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -12,7 +13,7 @@ function App() {
       const token = localStorage.getItem("tokenStore");
       if (token) {
         const verified = await axios.get(
-          "https://notesapp34.herokuapp.com/users/verify",
+          `${api}/users/verify`,
           {
             headers: { Authorization: token },
           }

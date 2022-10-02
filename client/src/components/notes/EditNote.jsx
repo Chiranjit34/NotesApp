@@ -1,28 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../api";
 
-export default function CreateNote() {
+export default function EditNote({ match }) {
   const [note, setNote] = useState({
     title: "",
     content: "",
     date: "",
-    time: "",
+    id: "",
   });
   const navigate = useNavigate();
+  const params = useParams();
+  useEffect(() => {
+    const getNote = async () => {
+      const token = localStorage.getItem("tokenStore");
+      if (params.id) {
+        const res = await axios.get(`${api}/api/notes/${params.id}`, {
+          headers: { Authorization: token },
+        });
+        setNote({
+          title: res.data.title,
+          content: res.data.content,
+          date: new Date(res.data.date).toLocaleDateString(),
+          time: res.data.time,
+          id: res.data._id,
+        });
+      }
+    };
+    getNote();
+  }, [params.id]);
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setNote({ ...note, [name]: value });
   };
 
-  const createNote = async (e) => {
+  const editNote = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("tokenStore");
       if (token) {
-        const { title, content, date, time } = note;
+        const { title, content, date, time, id } = note;
         const newNote = {
           title,
           content,
@@ -30,9 +49,10 @@ export default function CreateNote() {
           time,
         };
 
-        await axios.post(`${api}/api/notes`, newNote, {
+        await axios.put(`${api}/api/notes/${id}`, newNote, {
           headers: { Authorization: token },
         });
+
         return navigate("/");
       }
     } catch (err) {
@@ -42,8 +62,8 @@ export default function CreateNote() {
 
   return (
     <div className="create-note">
-      <h2>Create Note</h2>
-      <form onSubmit={createNote}>
+      <h2>Edit Note</h2>
+      <form onSubmit={editNote} autoComplete="off">
         <div className="row">
           <label htmlFor="title">Title</label>
           <input
@@ -55,6 +75,7 @@ export default function CreateNote() {
             onChange={onChangeInput}
           />
         </div>
+
         <div className="row">
           <label htmlFor="content">Content</label>
           <textarea
@@ -67,6 +88,7 @@ export default function CreateNote() {
             onChange={onChangeInput}
           />
         </div>
+
         <label htmlFor="date">
           Date: {note.date} {note.time}{" "}
         </label>

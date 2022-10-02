@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { api } from "../api";
 
 export default function Login({ setIsLogin }) {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
@@ -15,7 +16,7 @@ export default function Login({ setIsLogin }) {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://notesapp34.herokuapp.com/users/register",
+        `${api}/users/register`,
         {
           username: user.name,
           email: user.email,
@@ -32,13 +33,10 @@ export default function Login({ setIsLogin }) {
   const loginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "https://notesapp34.herokuapp.com/users/login",
-        {
-          email: user.email,
-          password: user.password,
-        }
-      );
+      const res = await axios.post(`${api}/users/login`, {
+        email: user.email,
+        password: user.password,
+      });
       setUser({ name: "", email: "", password: "" });
       localStorage.setItem("tokenStore", res.data.token);
       setIsLogin(true);

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { format } from "timeago.js";
 import axios from "axios";
+import { api } from "../../api";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
   const [token, setToken] = useState("");
 
   const getNotes = async (token) => {
-    const res = await axios.get("https://notesapp34.herokuapp.com/api/notes", {
+    const res = await axios.get(`${api}/api/notes`, {
       headers: { Authorization: token },
     });
     setNotes(res.data);
+    console.log(res.data);
   };
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export default function Home() {
   const deleteNote = async (id) => {
     try {
       if (token) {
-        await axios.delete(`https://notesapp34.herokuapp.com/api/notes/${id}`, {
+        await axios.delete(`${api}/api/notes/${id}`, {
           headers: { Authorization: token },
         });
         getNotes(token);
@@ -42,9 +44,14 @@ export default function Home() {
           <div className="text-wrapper">
             <p>{note.content}</p>
           </div>
-          <p className="date">{format(note.date)}</p>
+          <p className="date">
+            {note.date}{" "}
+            {note.time}
+          </p>
+          {/* <p className="date"></p> */}
           <div className="card-footer">
             {note.name}
+            <Link to={`edit/${note._id}`}>Edit</Link>
             <div onClick={() => deleteNote(note._id)}>
               <p>Delete</p>
             </div>
