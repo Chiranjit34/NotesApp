@@ -1,1 +1,1 @@
-export const api = "https://morning-peak-14619.herokuapp.com";
+export const api = "https://note-app-backend.vercel.app";
