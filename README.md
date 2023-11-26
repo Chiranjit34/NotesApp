@@ -11,7 +11,6 @@ This is a simple Note App built using the MERN stack (MongoDB, Express.js, React
 - [Running the Application](#running-the-application)
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
 
 ## Getting Started
@@ -72,14 +71,21 @@ NotesApp/
 |   |   |-- App.css
 |   |-- package.json
 |-- server/
-|   |-- config/
 |   |-- controllers/
+|   |   |-- noteCtrl.js
+|   |   |-- userCtrl.js
+|   |-- middleware/
+|   |   |-- auth.js
 |   |-- models/
+|   |   |-- noteModel.js
+|   |   |-- userModel.js
 |   |-- routes/
+|   |   |-- noteRouter.js
+|   |   |-- userRouter.js
 |   |-- .env
-|   |-- server.js
+|   |-- .gitignore
+|   |-- index.js
 |   |-- package.json
-|-- .gitignore
 |-- README.md
 ```
 
