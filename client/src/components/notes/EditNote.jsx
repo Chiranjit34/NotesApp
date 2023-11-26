@@ -93,18 +93,8 @@ export default function EditNote({ match }) {
           Date: {note.date} {note.time}{" "}
         </label>
         <div className="row">
-          <input
-            type="date"
-            id="date"
-            name="date"
-            onChange={onChangeInput}
-          />
-          <input
-            type="time"
-            id="time"
-            name="time"
-            onChange={onChangeInput}
-          />
+          <input type="date" id="date" name="date" onChange={onChangeInput} />
+          <input type="time" id="time" name="time" onChange={onChangeInput} />
         </div>
 
         <button type="submit">Save</button>

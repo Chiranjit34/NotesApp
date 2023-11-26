@@ -15,14 +15,11 @@ export default function Login({ setIsLogin }) {
   const registerSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        `${api}/users/register`,
-        {
-          username: user.name,
-          email: user.email,
-          password: user.password,
-        }
-      );
+      const res = await axios.post(`${api}/users/register`, {
+        username: user.name,
+        email: user.email,
+        password: user.password,
+      });
       setUser({ name: "", email: "", password: "" });
       setErr(res.data.msg);
     } catch (err) {

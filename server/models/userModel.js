@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    failedLoginAttempts: { type: Number, default: 0 },
+    lastLoginAttempt: { type: Date },
   },
   {
     timestamps: true,
