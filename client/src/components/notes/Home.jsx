@@ -41,6 +41,7 @@ export default function Home() {
       {notes.map((note) => (
         <div className="card" key={note._id}>
           <h4 title={note.title}>{note.title}</h4>
+          <div className="noteUpdated">{note.createdAt < note.updatedAt ? "Updated" : ""}</div>
           <div className="text-wrapper">
             <p>{note.content}</p>
           </div>
