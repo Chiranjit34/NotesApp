@@ -1,6 +1,11 @@
 body {
   background: black;
 }
+.noteUpdated {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+}
 .notes-page {
   width: 100%;
   min-height: 100vh;
