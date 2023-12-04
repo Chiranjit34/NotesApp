@@ -4,12 +4,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../api";
 
 export default function EditNote({ match }) {
+  const currentDate = new Date().toLocaleDateString('en-GB').split('/').reverse().join('-'); // Get current date in "ddmmyyyy" format
+  const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Get current time in HH:mm format
+
   const [note, setNote] = useState({
     title: "",
     content: "",
-    date: "",
-    id: "",
+    date: currentDate,
+    time: currentTime,
   });
+  
   const navigate = useNavigate();
   const params = useParams();
   useEffect(() => {
@@ -97,12 +101,14 @@ export default function EditNote({ match }) {
             type="date"
             id="date"
             name="date"
+            defaultValue={note.date}
             onChange={onChangeInput}
           />
           <input
             type="time"
             id="time"
             name="time"
+            defaultValue={note.time}
             onChange={onChangeInput}
           />
         </div>
